@@ -10,9 +10,6 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- html2canvas：用於將專屬約會小票轉成高解析 PNG 圖片儲存 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
   <!-- Google Fonts: Noto Serif TC & Noto Sans TC -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -935,7 +932,7 @@
           無壓力半日約會路線
         </h2>
         <p class="text-sm text-inkMuted mt-1.5">
-          12:00 – 19:30｜想吃什麼、想去哪裡，全都照妳的心情決定
+          12:00 – 19:30｜想做什麼全都照妳的心情決定
         </p>
       </div>
 
@@ -1330,7 +1327,7 @@
   <!-- ==================== 6. 約會小票彈窗（z-index: 9999 ＋ 直接儲存到手機相簿） ==================== -->
   <div
     id="ticket-modal"
-    class="flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300"
+    class="flex items-center justify-center p-3 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-ticket-title"
@@ -1339,8 +1336,8 @@
       id="ticket-modal-shell"
       class="relative w-full max-w-md my-auto transform translate-y-6 scale-95 opacity-0 transition-all duration-300"
     >
-      <!-- 專供 html2canvas 擷取的高質感票券區域（背景溫潤、字體清晰、零裁切） -->
-      <div id="ticket-capture-area" class="relative p-3.5 sm:p-4 rounded-[28px] bg-[#FAF6F0]">
+      <!-- 票券視覺區域 -->
+      <div id="ticket-capture-area" class="relative p-2.5 sm:p-4 rounded-[28px] bg-[#FAF6F0]">
         <!-- 透明長按儲存層：預先產好 PNG 後自動啟用，讓 LINE / iPhone 直接長按小票就能存相簿 -->
         <img
           id="ticket-longpress-img"
@@ -1351,54 +1348,54 @@
         />
         <div class="rounded-3xl bg-linen border-2 border-goldSoft/65 shadow-soft overflow-hidden">
           <!-- 票券頂部 -->
-          <div class="bg-gradient-to-r from-[#A67554] to-[#8C5E3C] text-linen px-6 py-5 flex items-center justify-between">
-            <div>
-              <p class="text-[10px] tracking-[0.25em] opacity-85 uppercase">BOARDING PASS · DATE TICKET</p>
-              <h3 id="modal-ticket-title" class="font-serif text-xl font-semibold mt-0.5 tracking-wide">
+          <div class="bg-gradient-to-r from-[#A67554] to-[#8C5E3C] text-linen px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <p class="text-[9px] sm:text-[10px] tracking-[0.16em] sm:tracking-[0.24em] opacity-85 uppercase whitespace-nowrap">BOARDING PASS · DATE TICKET</p>
+              <h3 id="modal-ticket-title" class="font-serif text-lg sm:text-xl font-semibold mt-0.5 tracking-wide whitespace-nowrap">
                 專屬約會登機證
               </h3>
             </div>
-            <div class="w-10 h-10 rounded-full bg-linen/15 border border-linen/30 flex items-center justify-center text-xl" aria-hidden="true">
+            <div class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full bg-linen/15 border border-linen/30 flex items-center justify-center text-lg sm:text-xl" aria-hidden="true">
               🐾
             </div>
           </div>
 
           <!-- 票券主體 -->
-          <div class="p-6">
-            <!-- 乘客、發行人與約會日期 -->
-            <div class="grid grid-cols-2 gap-3 rounded-2xl bg-paper border border-borderWarm px-4 py-3.5 mb-4">
-              <div>
+          <div class="p-4 sm:p-6">
+            <!-- 乘客、發行人與約會日期（改為彈性左右對齊，防止日期換行） -->
+            <div class="flex items-start justify-between gap-2 rounded-2xl bg-paper border border-borderWarm px-3.5 sm:px-4 py-3.5 mb-4">
+              <div class="shrink-0">
                 <span class="block text-[10px] tracking-widest text-inkMuted uppercase">PASSENGER</span>
                 <span class="font-serif text-sm font-semibold text-ink">小寶</span>
-                <span class="block text-[10px] text-sage mt-0.5">狗狗男朋友發行 🐾</span>
+                <span class="block text-[10px] text-sage mt-0.5 whitespace-nowrap">狗狗男朋友發行 🐾</span>
               </div>
-              <div class="text-right">
+              <div class="text-right shrink-0">
                 <span class="block text-[10px] tracking-widest text-inkMuted uppercase">約會日期</span>
-                <span id="pass-date" class="font-serif text-sm font-semibold text-terracotta">2026/11/29 (週日)</span>
-                <span class="block text-[10px] text-inkMuted mt-0.5">12:00 – 19:30</span>
+                <span id="pass-date" class="font-serif text-[13px] sm:text-sm font-semibold text-terracotta whitespace-nowrap">2026/11/29 (週日)</span>
+                <span class="block text-[10px] text-inkMuted mt-0.5 whitespace-nowrap">12:00 – 19:30</span>
               </div>
             </div>
 
-            <!-- 完整四站行程明細 -->
-            <div class="rounded-2xl bg-paper/75 border border-borderWarm p-4 space-y-2.5 mb-4 text-sm">
-              <div class="flex items-start justify-between gap-3">
-                <span class="text-xs text-inkMuted shrink-0 pt-0.5">12:00 台北午餐</span>
-                <span id="pass-lunch" class="font-serif font-semibold text-ink text-right">看當天心情 ✨</span>
+            <!-- 完整四站行程明細（優化手機窄螢幕字級，維持單行俐落排版） -->
+            <div class="rounded-2xl bg-paper/75 border border-borderWarm px-3.5 py-3.5 sm:p-4 space-y-2.5 mb-4">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] sm:text-xs text-inkMuted shrink-0 whitespace-nowrap">12:00 台北午餐</span>
+                <span id="pass-lunch" class="font-serif text-[12px] sm:text-sm font-semibold text-ink text-right">看當天心情 ✨</span>
               </div>
               <div class="h-px bg-borderWarm/75"></div>
-              <div class="flex items-start justify-between gap-3">
-                <span class="text-xs text-inkMuted shrink-0 pt-0.5">13:30 藝文散步</span>
-                <span id="pass-stop2" class="font-serif font-semibold text-ink text-right">松山文創園區</span>
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] sm:text-xs text-inkMuted shrink-0 whitespace-nowrap">13:30 藝文散步</span>
+                <span id="pass-stop2" class="font-serif text-[12px] sm:text-sm font-semibold text-ink text-right whitespace-nowrap">松山文創園區</span>
               </div>
               <div class="h-px bg-borderWarm/75"></div>
-              <div class="flex items-start justify-between gap-3">
-                <span class="text-xs text-inkMuted shrink-0 pt-0.5">15:45 眷村散步</span>
-                <span class="font-serif font-semibold text-ink text-right">四四南村</span>
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] sm:text-xs text-inkMuted shrink-0 whitespace-nowrap">15:45 眷村散步</span>
+                <span class="font-serif text-[12px] sm:text-sm font-semibold text-ink text-right whitespace-nowrap">四四南村</span>
               </div>
               <div class="h-px bg-borderWarm/75"></div>
-              <div class="flex items-start justify-between gap-3">
-                <span class="text-xs text-inkMuted shrink-0 pt-0.5">17:00 傍晚夜景</span>
-                <span id="pass-stop4" class="font-serif font-semibold text-ink text-right">台北 101 觀景台＆購物中心</span>
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] sm:text-xs text-inkMuted shrink-0 whitespace-nowrap">17:00 傍晚夜景</span>
+                <span id="pass-stop4" class="font-serif text-[12px] sm:text-sm font-semibold text-ink text-right whitespace-nowrap">台北 101 觀景台＆購物中心</span>
               </div>
             </div>
 
@@ -1413,10 +1410,10 @@
             <!-- 復古虛線撕票線 -->
             <div class="border-t border-dashed border-borderWarm my-4"></div>
 
-            <!-- 條碼與小肉球印記 -->
-            <div class="flex items-center justify-between gap-3 pt-1">
-              <div class="opacity-55" aria-hidden="true">
-                <svg width="160" height="26" viewBox="0 0 160 26" fill="#3D322C">
+            <!-- 條碼與小肉球印記（縮減手機條碼寬度，確保 VALID FOR 小寶 不換行） -->
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <div class="opacity-55 shrink-0" aria-hidden="true">
+                <svg class="w-[122px] sm:w-[156px] h-[24px] sm:h-[26px]" viewBox="0 0 160 26" preserveAspectRatio="none" fill="#3D322C">
                   <rect x="2" y="0" width="3" height="26"/>
                   <rect x="8" y="0" width="1.5" height="26"/>
                   <rect x="13" y="0" width="4" height="26"/>
@@ -1443,8 +1440,8 @@
                   <rect x="156" y="0" width="2.5" height="26"/>
                 </svg>
               </div>
-              <div class="text-right">
-                <span class="inline-flex items-center gap-1 text-[11px] font-serif text-terracotta font-semibold">
+              <div class="text-right shrink-0">
+                <span class="inline-flex items-center gap-1 text-[11px] font-serif text-terracotta font-semibold whitespace-nowrap">
                   <span>VALID FOR 小寶</span>
                   <span>🐾</span>
                 </span>
@@ -1530,7 +1527,6 @@
       const closeModalBtn = document.getElementById('close-modal-btn');
       const downloadTicketBtn = document.getElementById('download-ticket-btn');
       const downloadBtnText = document.getElementById('download-btn-text');
-      const ticketCaptureArea = document.getElementById('ticket-capture-area');
       const ticketLongpressImg = document.getElementById('ticket-longpress-img');
 
       const passDate = document.getElementById('pass-date');
@@ -1904,23 +1900,328 @@
         resetCachedTicket();
       }
 
+      // 繪製圓角矩形（支援四個角各自設定半徑，完整相容所有手機版本）
+      function drawRoundedRect(ctx, x, y, w, h, radii) {
+        const r = typeof radii === 'number'
+          ? { tl: radii, tr: radii, br: radii, bl: radii }
+          : radii;
+        ctx.beginPath();
+        ctx.moveTo(x + r.tl, y);
+        ctx.lineTo(x + w - r.tr, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
+        ctx.lineTo(x + w, y + h - r.br);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
+        ctx.lineTo(x + r.bl, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
+        ctx.lineTo(x, y + r.tl);
+        ctx.quadraticCurveTo(x, y, x + r.tl, y);
+        ctx.closePath();
+      }
+
+      // 中英文長文字自動斷行輔助函式
+      function wrapCanvasText(ctx, text, maxWidth) {
+        const chars = Array.from(String(text || ''));
+        const lines = [];
+        let line = '';
+        for (const ch of chars) {
+          const testLine = line + ch;
+          if (ctx.measureText(testLine).width > maxWidth && line) {
+            lines.push(line);
+            line = ch;
+          } else {
+            line = testLine;
+          }
+        }
+        if (line) lines.push(line);
+        return lines.length ? lines : [''];
+      }
+
+      // 純原生 Canvas 2D 高解析票卷繪製（徹底解決手機下載排版跑掉問題）
+      function renderTicketCanvas() {
+        const chosenDate = state.dateMode === 'default' ? '2026-11-29' : (customDateInput.value || state.customDate);
+        const dateText = formatDateWithWeekday(chosenDate);
+        const trimmedLunch = state.lunchText.trim();
+        const lunchText = (!state.lunchMood && trimmedLunch) ? trimmedLunch : '看當天心情 ✨';
+        const stop2Text = labels.stop2[state.stop2];
+        const stop4Text = labels.stop4[state.stop4];
+        const couponItems = state.coupons.size === 0
+          ? [{ text: '三張貼心兌換券當天隨時生效 🐾', isEmpty: true }]
+          : Array.from(state.coupons).map((k) => ({ text: labels.coupons[k], isEmpty: false }));
+
+        const serifFont = '"Noto Serif TC", "PingFang TC", "Microsoft JhengHei", serif';
+        const sansFont = '"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif';
+
+        const scale = 2.5;
+        const W = 420;
+        const outerPad = 18;
+        const cardX = outerPad;
+        const cardY = outerPad;
+        const cardW = W - outerPad * 2;
+        const innerPad = 24;
+        const contentX = cardX + innerPad;
+        const contentW = cardW - innerPad * 2;
+
+        // 建立量測用暫存畫布以精算動態高度
+        const measureCtx = document.createElement('canvas').getContext('2d');
+        const rowsData = [
+          { time: '12:00 台北午餐', val: lunchText },
+          { time: '13:30 藝文散步', val: stop2Text },
+          { time: '15:45 眷村散步', val: '四四南村' },
+          { time: '17:00 傍晚夜景', val: stop4Text },
+        ];
+
+        measureCtx.font = `600 14px ${serifFont}`;
+        const rowRightMaxW = contentW - 32 - 102;
+        const measuredRows = rowsData.map((r) => {
+          const lines = wrapCanvasText(measureCtx, r.val, rowRightMaxW);
+          return { ...r, lines, height: Math.max(22, lines.length * 21) };
+        });
+
+        // 精算兌換券膠囊換行排版
+        measureCtx.font = `500 12px ${sansFont}`;
+        const pillH = 28;
+        const pillGapX = 8;
+        const pillGapY = 8;
+        const pillLayouts = [];
+        let px = 0;
+        let py = 0;
+        couponItems.forEach((item) => {
+          const tw = measureCtx.measureText(item.text).width;
+          const pw = Math.min(contentW, Math.ceil(tw + 24));
+          if (px > 0 && px + pw > contentW) {
+            px = 0;
+            py += pillH + pillGapY;
+          }
+          pillLayouts.push({ ...item, x: px, y: py, w: pw, h: pillH });
+          px += pw + pillGapX;
+        });
+        const couponsBlockH = py + pillH;
+
+        const headerH = 86;
+        const passengerBoxH = 74;
+        const itineraryBoxPadY = 16;
+        const rowDividerGap = 18;
+        const itineraryBoxH =
+          itineraryBoxPadY * 2 +
+          measuredRows.reduce((sum, r) => sum + r.height, 0) +
+          (measuredRows.length - 1) * rowDividerGap;
+
+        const cardH =
+          headerH +
+          24 + // top body pad
+          passengerBoxH +
+          16 +
+          itineraryBoxH +
+          18 +
+          22 + // coupons title
+          couponsBlockH +
+          22 + // dashed line spacing
+          16 +
+          30 + // barcode footer
+          24;  // bottom body pad
+
+        const H = cardH + outerPad * 2;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(W * scale);
+        canvas.height = Math.round(H * scale);
+        const ctx = canvas.getContext('2d');
+        ctx.scale(scale, scale);
+
+        // 1. 外層手工亞麻紙背景
+        ctx.fillStyle = '#FAF6F0';
+        ctx.fillRect(0, 0, W, H);
+
+        // 2. 卡片陰影與白色主體
+        ctx.save();
+        ctx.shadowColor = 'rgba(61, 50, 44, 0.12)';
+        ctx.shadowBlur = 22;
+        ctx.shadowOffsetY = 8;
+        drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 24);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fill();
+        ctx.restore();
+
+        // 3. 頂部紅陶漸層標頭（裁切圓角）
+        ctx.save();
+        drawRoundedRect(ctx, cardX, cardY, cardW, headerH, { tl: 24, tr: 24, br: 0, bl: 0 });
+        ctx.clip();
+        const headerGrad = ctx.createLinearGradient(cardX, cardY, cardX + cardW, cardY);
+        headerGrad.addColorStop(0, '#A67554');
+        headerGrad.addColorStop(1, '#8C5E3C');
+        ctx.fillStyle = headerGrad;
+        ctx.fillRect(cardX, cardY, cardW, headerH);
+        ctx.restore();
+
+        // 標頭左側文字
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+        ctx.font = `500 10px ${sansFont}`;
+        ctx.fillText('BOARDING PASS · DATE TICKET', contentX, cardY + 29);
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = `600 20px ${serifFont}`;
+        ctx.fillText('專屬約會登機證', contentX, cardY + 56);
+
+        // 標頭右側小肉球圓徽章
+        const badgeR = 20;
+        const badgeCx = cardX + cardW - innerPad - badgeR;
+        const badgeCy = cardY + headerH / 2;
+        ctx.beginPath();
+        ctx.arc(badgeCx, badgeCy, badgeR, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.16)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.textAlign = 'center';
+        ctx.font = `18px ${sansFont}`;
+        ctx.fillText('🐾', badgeCx, badgeCy + 1);
+
+        // 4. 乘客與日期區塊
+        let curY = cardY + headerH + 24;
+        drawRoundedRect(ctx, contentX, curY, contentW, passengerBoxH, 16);
+        ctx.fillStyle = '#FAF6F0';
+        ctx.fill();
+        ctx.strokeStyle = '#E6DDD0';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // 左側乘客資訊
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#786A62';
+        ctx.font = `500 10px ${sansFont}`;
+        ctx.fillText('PASSENGER', contentX + 16, curY + 19);
+
+        ctx.fillStyle = '#3D322C';
+        ctx.font = `600 15px ${serifFont}`;
+        ctx.fillText('小寶', contentX + 16, curY + 39);
+
+        ctx.fillStyle = '#7A8B7B';
+        ctx.font = `400 10.5px ${sansFont}`;
+        ctx.fillText('狗狗男朋友發行 🐾', contentX + 16, curY + 58);
+
+        // 右側約會日期
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#786A62';
+        ctx.font = `500 10px ${sansFont}`;
+        ctx.fillText('約會日期', contentX + contentW - 16, curY + 19);
+
+        ctx.fillStyle = '#A67554';
+        ctx.font = `600 14.5px ${serifFont}`;
+        ctx.fillText(dateText, contentX + contentW - 16, curY + 39);
+
+        ctx.fillStyle = '#786A62';
+        ctx.font = `400 10.5px ${sansFont}`;
+        ctx.fillText('12:00 – 19:30', contentX + contentW - 16, curY + 58);
+
+        // 5. 四站行程明細區塊
+        curY += passengerBoxH + 16;
+        drawRoundedRect(ctx, contentX, curY, contentW, itineraryBoxH, 16);
+        ctx.fillStyle = 'rgba(250, 246, 240, 0.78)';
+        ctx.fill();
+        ctx.strokeStyle = '#E6DDD0';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        let rowY = curY + itineraryBoxPadY;
+        measuredRows.forEach((row, idx) => {
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#786A62';
+          ctx.font = `400 12px ${sansFont}`;
+          ctx.fillText(row.time, contentX + 16, rowY + 11);
+
+          ctx.textAlign = 'right';
+          ctx.fillStyle = '#3D322C';
+          ctx.font = `600 14px ${serifFont}`;
+          row.lines.forEach((ln, lineIdx) => {
+            ctx.fillText(ln, contentX + contentW - 16, rowY + 11 + lineIdx * 21);
+          });
+
+          rowY += row.height;
+          if (idx < measuredRows.length - 1) {
+            const divY = rowY + rowDividerGap / 2;
+            ctx.beginPath();
+            ctx.moveTo(contentX + 16, divY);
+            ctx.lineTo(contentX + contentW - 16, divY);
+            ctx.strokeStyle = 'rgba(230, 221, 208, 0.85)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            rowY += rowDividerGap;
+          }
+        });
+
+        // 6. 已收藏兌換券清單
+        curY += itineraryBoxH + 18;
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#786A62';
+        ctx.font = `400 12px ${sansFont}`;
+        ctx.fillText('小寶的口袋已收藏兌換券：', contentX, curY + 8);
+
+        const pillsStartY = curY + 22;
+        pillLayouts.forEach((p) => {
+          const rx = contentX + p.x;
+          const ry = pillsStartY + p.y;
+          drawRoundedRect(ctx, rx, ry, p.w, p.h, 14);
+          ctx.fillStyle = p.isEmpty ? '#FAF6F0' : '#EEF2EB';
+          ctx.fill();
+          ctx.strokeStyle = p.isEmpty ? '#E6DDD0' : 'rgba(122, 139, 123, 0.3)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.textAlign = 'center';
+          ctx.fillStyle = p.isEmpty ? '#786A62' : '#7A8B7B';
+          ctx.font = `500 12px ${sansFont}`;
+          ctx.fillText(p.text, rx + p.w / 2, ry + p.h / 2 + 0.5);
+        });
+
+        // 7. 復古虛線撕票線
+        const dashY = pillsStartY + couponsBlockH + 22;
+        ctx.save();
+        ctx.beginPath();
+        ctx.setLineDash([5, 4]);
+        ctx.moveTo(contentX, dashY);
+        ctx.lineTo(contentX + contentW, dashY);
+        ctx.strokeStyle = '#E6DDD0';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        ctx.restore();
+
+        // 8. 底部條碼與專屬簽章
+        const footerY = dashY + 16;
+        const barPattern = [3, 1.5, 4, 2, 1.5, 4.5, 2, 3, 1.5, 4, 2, 3.5, 1.5, 4, 2, 3, 1.5, 4.5, 2, 3, 1.5, 4, 2, 2.5];
+        let bx = contentX;
+        ctx.fillStyle = 'rgba(61, 50, 44, 0.55)';
+        barPattern.forEach((bw, idx) => {
+          ctx.fillRect(bx, footerY + 2, bw, 24);
+          bx += bw + (idx % 3 === 0 ? 3.5 : 2.5);
+        });
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#A67554';
+        ctx.font = `600 12px ${serifFont}`;
+        ctx.fillText('VALID FOR 小寶 🐾', contentX + contentW, footerY + 15);
+
+        // 9. 外層淡金細框（最後繪製，確保邊緣銳利不被標頭蓋住）
+        drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 24);
+        ctx.strokeStyle = 'rgba(201, 169, 110, 0.7)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        return canvas;
+      }
+
       function prepareTicketImage() {
         if (cachedTicketBlob) return Promise.resolve(cachedTicketBlob);
         if (ticketPreparePromise) return ticketPreparePromise;
-        if (typeof window.html2canvas !== 'function') return Promise.resolve(null);
 
         ticketPreparePromise = (async () => {
           try {
             if (document.fonts && document.fonts.ready) {
               await document.fonts.ready;
             }
-            const canvas = await window.html2canvas(ticketCaptureArea, {
-              scale: 2,
-              useCORS: true,
-              backgroundColor: '#FAF6F0',
-              logging: false,
-            });
-
+            const canvas = renderTicketCanvas();
             const dataUrl = canvas.toDataURL('image/png', 1.0);
             const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 1.0));
             if (!blob) return null;
